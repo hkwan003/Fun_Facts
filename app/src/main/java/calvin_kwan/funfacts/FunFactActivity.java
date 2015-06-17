@@ -4,8 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class FunFactActivity extends ActionBarActivity
@@ -18,8 +21,40 @@ public class FunFactActivity extends ActionBarActivity
         setContentView(R.layout.activity_fun_fact);
 
         // Declare our View variables and assign View from the layout file
-        TextView faceLabel = findViewById();
-        Button showFactButton;
+        final TextView factLabel = (TextView) findViewById(R.id.FunFactTextView);
+        Button showFactButton = (Button) findViewById(R.id.FunFactbutton);
+        View.OnClickListener listener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                String fact = "";
+                //will randomly select fact
+                Random randomGenerator = new Random();   //constuct a new number generator
+                int randomNumber = randomGenerator.nextInt(3);
+
+                /*convert random number to text fact
+                0 = Ants stretch when they wake up in the morning.
+                1 = Ostsriches can run faster than horses
+                2 = Olympic gold medals are actually made mostly of silver
+                */
+                //update the label with our dynamic fact
+                if(randomNumber == 0)
+                {
+                    fact = "Ants stretch when they wake up in the morning.";
+                }
+                else if(randomNumber == 1)
+                {
+                    fact = "Ostsriches can run faster than horses";
+                }
+                else if(randomNumber == 2)
+                {
+                    fact = "Olympic gold medals are actually made mostly of silver";
+                }
+                factLabel.setText(fact);
+            }
+        };
+        showFactButton.setOnClickListener(listener);
     }
 
     @Override
